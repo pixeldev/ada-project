@@ -1,0 +1,8 @@
+-- Primer caso --
+El mayor puntaje es 36 y se obtiene el camino (0, 2), (0, 3), (0, 4), (1, 4), (2, 4), (3, 4), (4, 4)
+
+-- Segundo caso --
+El mayor puntaje es 15 y se obtiene el camino (2, 0), (2, 1), (3, 1), (3, 2), (3, 3), (4, 3)
+
+-- Tercer caso --
+El mayor puntaje es 21 y se obtiene el camino (0, 1), (1, 1), (2, 1), (3, 1), (4, 1)
