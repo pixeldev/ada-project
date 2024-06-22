@@ -64,3 +64,26 @@ board is as follows:
 * **Efficiency**: Top-down dynamic programming is more efficient than the brute-force approach, which would try all possible
   combinations of moves. The efficiency comes from the fact that each subproblem is solved only once and the results are
   stored for use in future subproblems.
+
+## Pseudocode
+```
+1. Initialize a dp matrix of size n x n with all elements as -1
+2. Initialize a pair matrix path of size n x n to track the path
+3. Define the function solve(i, j) that returns the maximum score that can be obtained from the cell (i, j)
+   3.1 If (i, j) is outside the board, return 0
+   3.2 If dp[i][j] is not -1, return dp[i][j]
+   3.3 Calculate the maximum score that can be obtained by moving down (solve(i + 1, j)) and to the right (solve(i, j + 1))
+   3.4 If the maximum score is obtained by moving down, update path[i][j] with (i + 1, j) and dp[i][j] with down + board[i][j]
+   3.5 If the maximum score is obtained by moving to the right, update path[i][j] with (i, j + 1) and dp[i][j] with right + board[i][j]
+   3.6 Return dp[i][j]
+4. For each cell (i, j) on the board:
+   4.1 Call solve(i, j)
+   4.2 If dp[i][j] is greater than max_score, update max_score with dp[i][j] and max_i, max_j with i, j
+5. Initialize a boolean matrix isPath of size n x n with all elements as false
+6. While (max_i, max_j) is not (-1, -1):
+   6.1 Mark isPath[max_i][max_j] as true
+   6.2 Update (max_i, max_j) with path[max_i][max_j]
+7. For each cell (i, j) on the board:
+   7.1 If isPath[i][j] is true, print the cell with a green background
+   7.2 Otherwise, print the cell without changing the color
+```
