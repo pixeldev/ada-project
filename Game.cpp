@@ -1,5 +1,12 @@
 /**
- * Equipo
+ * Proyecto: Juego con el mejor puntaje.
+ * Materia: Análisis y Diseño de Algoritmos.
+ * Semestre: 2024-2.
+ * Integrantes:
+ * - Luna González Gabriel Alexis
+ * - Mazariegos Aguilar Julio Darikson
+ * - Miranda San Martín Ángel
+ * Equipo: C
  */
 #include "Game.h"
 
@@ -40,11 +47,12 @@ Board *Game::getBoard() const {
 
 Solution *Game::solve() {
     int n = this->board->getN();
-    int maxScore = -1, maxI = -1, maxJ = -1;
+    int maxScore = -1, maxI = -1, maxJ = -1, score = 0;
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            if (this->solve(i, j) > maxScore) {
-                maxScore = this->solve(i, j);
+            score = this->solve(i, j);
+            if (score > maxScore) {
+                maxScore = score;
                 maxI = i;
                 maxJ = j;
             }

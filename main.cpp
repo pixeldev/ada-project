@@ -1,3 +1,13 @@
+/**
+ * Proyecto: Juego con el mejor puntaje.
+ * Materia: Análisis y Diseño de Algoritmos.
+ * Semestre: 2024-2.
+ * Integrantes:
+ * - Luna González Gabriel Alexis
+ * - Mazariegos Aguilar Julio Darikson
+ * - Miranda San Martín Ángel
+ * Equipo: C
+ */
 #include <iostream>
 
 #include "Game.h"

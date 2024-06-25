@@ -1,6 +1,15 @@
+/**
+ * Proyecto: Juego con el mejor puntaje.
+ * Materia: Análisis y Diseño de Algoritmos.
+ * Semestre: 2024-2.
+ * Integrantes:
+ * - Luna González Gabriel Alexis
+ * - Mazariegos Aguilar Julio Darikson
+ * - Miranda San Martín Ángel
+ * Equipo: C
+ */
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <ctime>
 #include <iomanip>
 
@@ -31,8 +40,18 @@ int solve(int i, int j) {
 
 int main() {
     srand(time(0));
-    cout << "Enter the size of the board: \n>> ";
+    cout << "Ingrea el tamaño del tablero: \n>> ";
     cin >> n;
+
+    int min, max;
+    cout << "Ingresa el rango de valores aleatorios: \n>> ";
+    cin >> min >> max;
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            board[i][j] = rand() % (max - min + 1) + min;
+        }
+    }
 
     cout << "Tablero:\n";
     for (int i = 0; i < n; ++i) {
@@ -47,19 +66,19 @@ int main() {
     }
 
     memset(dp, -1, sizeof(dp));
-    int max_score = -1, max_i = -1, max_j = -1;
+    int max_score = -1, max_i = -1, max_j = -1, score = 0;
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            if (solve(i, j) > max_score) {
-                max_score = solve(i, j);
+            score = solve(i, j);
+            if (score > max_score) {
+                max_score = score;
                 max_i = i;
                 max_j = j;
             }
         }
     }
-    cout << "Max score: " << max_score << "\nPath: ";
+    cout << "Máximo puntaje posible: " << max_score << "\nCamino: ";
 
-    // Create a 2D boolean array to mark the path
     vector<vector<bool>> isPath(n, vector<bool>(n, false));
     int x = max_i, y = max_j;
     while (x != -1 && y != -1) {
@@ -67,7 +86,6 @@ int main() {
         tie(x, y) = path[x][y];
     }
 
-    // Print the board with the path colored in green
     cout << "Tablero:\n";
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
