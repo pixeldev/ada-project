@@ -40,17 +40,49 @@ void initializeFromFile(const string& filename) {
     }
 }
 
+void printDp() {
+    cout << "DP:\n";
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            cout << "| " << setw(3) << dp[i][j] << " ";
+        }
+        cout << "|\n";
+        for (int j = 0; j < n; ++j) {
+            cout << "+-----";
+        }
+        cout << "+\n";
+    }
+}
+void printPath(){
+    cout << "Path:\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << "(" << path[i][j].first << ", " << path[i][j].second << ") ";
+        }
+        cout << "\n";
+    }
+}
+
 int solve(int i, int j) {
     if (i >= n || j >= n) return 0;
     if (dp[i][j] != -1) return dp[i][j];
     int down = solve(i + 1, j);
     int right = solve(i, j + 1);
+    cout << "-------- Calculando dp[" << i << "][" << j << "] --------\n";
     if (down > right) {
         path[i][j] = (i + 1 < n) ? make_pair(i + 1, j) : make_pair(-1, -1);
-        return dp[i][j] = down + board[i][j];
+        int result = dp[i][j] = down + board[i][j];
+        printDp();
+        printPath();
+        cout << "-------------------------------------\n";
+        return result;
     } else {
         path[i][j] = (j + 1 < n) ? make_pair(i, j + 1) : make_pair(-1, -1);
-        return dp[i][j] = right + board[i][j];
+        int result = dp[i][j] = right + board[i][j];
+        printDp();
+        printPath();
+        cout << "-------------------------------------\n";
+        return result;
     }
 }
 
@@ -156,7 +188,7 @@ int main() {
         path[i] = new pair<int, int>[n];
     }
 
-    cout << "------------------------------------\n" << "Tablero:\n";
+    cout << "-------------------------------------\n" << "Tablero:\n";
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
             cout << "| " << setw(3) << board[i][j] << " ";
@@ -179,7 +211,7 @@ int main() {
             }
         }
     }
-    cout << "------------------------------------\n" << "Máximo puntaje posible: " << max_score << "\n\nCamino: \n";
+    cout << "-------------------------------------\n" << "Máximo puntaje posible: " << max_score << "\n\nCamino: \n";
 
     vector<vector<bool>> isPath(n, vector<bool>(n, false));
     int x = max_i, y = max_j;
@@ -203,6 +235,6 @@ int main() {
         cout << "+\n";
     }
 
-    cout << "------------------------------------\n";
+    cout << "-------------------------------------\n";
     return 0;
 }
